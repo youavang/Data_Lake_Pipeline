@@ -1,0 +1,294 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Parameters": {
+    "Name": {
+      "Type": "String"
+    },
+    "InstanceType": {
+      "Type": "String"
+    },
+    "InstanceCount": {
+      "Type": "Number",
+      "Default": 1
+    },
+    "ClientIP": {
+      "Type": "String"
+    },
+    "Cloud9IP": {
+      "Type": "String"
+    },
+    "KeyPairName": {
+      "Type": "String"
+    },
+    "ReleaseLabel": {
+      "Type": "String"
+    },
+    "TerminationProtected": {
+      "Type": "String",
+      "Default": "false"
+    },
+    "EbsRootVolumeSize": {
+      "Type": "String"
+    }
+  },
+  "Resources": {
+    "cluster": {
+      "Type": "AWS::EMR::Cluster",
+      "Properties": {
+        "Applications": [
+          {
+            "Name": "Hadoop"
+          },
+          {
+            "Name": "Oozie"
+          },
+          {
+            "Name": "Sqoop"
+          },
+          {
+            "Name": "Hive"
+          },
+          {
+            "Name": "Hue"
+          },
+          {
+            "Name": "Ganglia"
+          },
+          {
+            "Name": "Spark"
+          }
+        ],
+        "EbsRootVolumeSize": {
+          "Ref": "EbsRootVolumeSize"
+        },
+        "Instances": {
+          "MasterInstanceGroup": {
+            "InstanceCount": 1,
+            "InstanceType": {
+              "Ref": "InstanceType"
+            },
+            "Market": "ON_DEMAND",
+            "Name": {
+              "Fn::Join": [
+                "",
+                [
+                  "masterig-",
+                  {
+                    "Ref": "Name"
+                  }
+                ]
+              ]
+            }
+          },
+          "CoreInstanceGroup": {
+            "InstanceCount": {
+              "Ref": "InstanceCount"
+            },
+            "InstanceType": {
+              "Ref": "InstanceType"
+            },
+            "Market": "ON_DEMAND",
+            "Name": {
+              "Fn::Join": [
+                "",
+                [
+                  "coreig-",
+                  {
+                    "Ref": "Name"
+                  }
+                ]
+              ]
+            }
+          },
+          "TerminationProtected": {
+            "Ref": "TerminationProtected"
+          },
+          "Ec2KeyName": {
+            "Ref": "KeyPairName"
+          },
+          "AdditionalMasterSecurityGroups": [
+            {
+              "Fn::GetAtt": [
+                "emrMasterSecurityGroup",
+                "GroupId"
+              ]
+            }
+          ]
+        },
+        "Name": {
+          "Ref": "Name"
+        },
+        "JobFlowRole": {
+          "Ref": "emrEc2InstanceProfile"
+        },
+        "ServiceRole": {
+          "Ref": "emrRole"
+        },
+        "ReleaseLabel": {
+          "Ref": "ReleaseLabel"
+        },
+        "VisibleToAllUsers": true,
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": {
+              "Ref": "Name"
+            }
+          }
+        ]
+      }
+    },
+    "emrMasterSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Allow Cloud9 and client access to master node",
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 22,
+            "ToPort": 22,
+            "CidrIp": {
+              "Ref": "Cloud9IP"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 22,
+            "ToPort": 22,
+            "CidrIp": {
+              "Ref": "ClientIP"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 80,
+            "ToPort": 80,
+            "CidrIp": {
+              "Ref": "ClientIP"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 50070,
+            "ToPort": 50070,
+            "CidrIp": {
+              "Ref": "ClientIP"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 8888,
+            "ToPort": 8888,
+            "CidrIp": {
+              "Ref": "ClientIP"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 8088,
+            "ToPort": 8088,
+            "CidrIp": {
+              "Ref": "ClientIP"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 8080,
+            "ToPort": 8080,
+            "CidrIp": {
+              "Ref": "ClientIP"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 9080,
+            "ToPort": 9080,
+            "CidrIp": {
+              "Ref": "ClientIP"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 18080,
+            "ToPort": 18080,
+            "CidrIp": {
+              "Ref": "ClientIP"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 8890,
+            "ToPort": 8890,
+            "CidrIp": {
+              "Ref": "ClientIP"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 11000,
+            "ToPort": 11000,
+            "CidrIp": {
+              "Ref": "ClientIP"
+            }
+          }
+        ],
+        "SecurityGroupEgress": []
+      }
+    },
+    "emrRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2008-10-17",
+          "Statement": [
+            {
+              "Sid": "",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "elasticmapreduce.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Path": "/",
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceRole"
+        ]
+      }
+    },
+    "emrEc2Role": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2008-10-17",
+          "Statement": [
+            {
+              "Sid": "",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Path": "/",
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceforEC2Role"
+        ]
+      }
+    },
+    "emrEc2InstanceProfile": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "Path": "/",
+        "Roles": [
+          {
+            "Ref": "emrEc2Role"
+          }
+        ]
+      }
+    }
+  }
+}
