@@ -1,4 +1,4 @@
-# Data Lake Pipeline with with AWS EMR, AWS S3, Spark and Databricks
+# Data Lake Pipeline with AWS EMR, AWS S3, Spark and Databricks
 
 Every year the United States Census Bureau conduct a census to get a count of the population and to get data about its people and economy. Data collected from the census helps the U.S. government to determine the number of seats each state has in the U.S. House of Representatives and to distribute federal funds to local communities. For this analysis, data is extracted from census.gov and flows through a data pipeline, in which it goes through transformation and analysis. 
 
