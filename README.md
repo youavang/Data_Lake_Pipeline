@@ -6,7 +6,7 @@ The resources used in the data pipeline are AWS S3 buckets, AWS EMR, Pyspark and
 
 ![flow](https://github.com/youavang/Data_Lake_Pipeline/blob/main/Databricks_ETL_images/EMR-Spark-Databricks.jpg)
 
-The process in data pipeline includes the following:
+The process in the data pipeline includes the following:
 
 1.	Create an AWS EMR cluster.
 2.	SSH to the EMR master node.
