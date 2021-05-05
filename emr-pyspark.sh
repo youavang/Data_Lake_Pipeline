@@ -2,11 +2,16 @@
 # Before you begin, you must create an IAM User with AmazonS3FullAccess policy.
 # You will need the User's Access Key ID and Secret Access Key for this lab.
 
-# First, we need to create a Cloud9 instance and ssh into it.
-# Next, download Pyspark and use it to get our dataset via API.
-# Then we're going to change the json file into a dataframe.
-# Finally, we'll load the dataset into our S3 bucket for analysis in Databricks.
-
+# Data extraction and load process:
+# 1) Create an AWS EMR and ssh into the edge node.
+# 2) Configure AWS credential.
+# 3) Update the node.
+# 4) Setup Python environment.
+# 5) Start a Spark session.
+# 6) Import dependencies.
+# 7) Extract dataset via API
+# 8) Transform the dataset into a Spark dataframe.
+# 9) Save the dataframe into an S3 bucket in csv format.
 # In Databricks we will mount our S3 bucket and extract our data for analysis.
 
 ############################################
