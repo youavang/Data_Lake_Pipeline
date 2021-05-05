@@ -29,7 +29,7 @@ A major challenge I faced, was not having the resources to integrate Databricks 
 ![1Spark](https://github.com/youavang/Data_Lake_Pipeline/blob/main/Databricks_ETL_images/01-Spark.png)
 ![2Spark](https://github.com/youavang/Data_Lake_Pipeline/blob/main/Databricks_ETL_images/02-Spark.png)
 ![3Spark](https://github.com/youavang/Data_Lake_Pipeline/blob/main/Databricks_ETL_images/03-Spark.png)
-![4Spark](https://github.com/youavang/Data_Lake_Pipeline/blob/main/Databricks_ETL_images/04-Spark.png)
+![4Spark](https://github.com/youavang/Data_Lake_Pipeline/blob/main/Databricks_ETL_images/04Spark.png)
 ![1S3conf](https://github.com/youavang/Data_Lake_Pipeline/blob/main/Databricks_ETL_images/01-S3-conf.png)
 ![1db](https://github.com/youavang/Data_Lake_Pipeline/blob/main/Databricks_ETL_images/1-Databricks.png)
 ![2db](https://github.com/youavang/Data_Lake_Pipeline/blob/main/Databricks_ETL_images/2-Databricks.png)
