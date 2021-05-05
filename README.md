@@ -24,6 +24,8 @@ The process in data pipeline includes the following:
 14.	Analyze the data.
 15.	Store transformed data in S3 bucket in csv format.
 
+A major challenge I faced, was not having the resources to integrate Databricks with AWS. I was using the Community Databricks and the free tier of AWS Services, so there are restrictions to what resources are available to me. I overcame this challenge by mounting the S3 bucket in Databricks and was able to create a seemless data pipeline.
+
 ![1Spark](https://github.com/youavang/Data_Lake_Pipeline/blob/main/Databricks_ETL_images/01-Spark.png)
 ![2Spark](https://github.com/youavang/Data_Lake_Pipeline/blob/main/Databricks_ETL_images/02-Spark.png)
 ![3Spark](https://github.com/youavang/Data_Lake_Pipeline/blob/main/Databricks_ETL_images/03-Spark.png)
