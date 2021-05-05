@@ -24,7 +24,7 @@ The process in the data pipeline includes the following:
 14.	Analyze the data.
 15.	Store transformed data in S3 bucket in csv format.
 
-A challenge I hade to overcome was figuring how to put this entire pipeline together and use pyspark to query the data in within a week. The lecture in class on AWS EMR, Spark, and Databricks was minimal. Also, lecture on integrating Databricks was non-existent. I had to do a lot of research and experiments to ensure the integrity of the data, a smooth flow of the data through each phase of the data pipeline, gain insights from the data through query.
+A challenge I hade to overcome was figuring how to put this entire pipeline together and use pyspark to query the data within a week. The lecture in class on AWS EMR, Spark, and Databricks was minimal. Also, lecture on integrating Databricks was non-existent. I had to do a lot of research and experiments to ensure the integrity of the data, a smooth flow of the data through each phase of the data pipeline, gain insights from the data through query.
 
 The major challenge I faced, was not having the resources to integrate Databricks with AWS. I was using the Community Databricks and the free tier of AWS Services, so there are restrictions to what resources are available to me. I overcame this challenge by mounting the S3 bucket in Databricks and was able to create a seemless data pipeline.
 
