@@ -2,7 +2,7 @@
 
 Every year the United States Census Bureau conduct a census to get a count of the population and to get data about its people and economy. Data collected from the census helps the U.S. government to determine the number of seats each state has in the U.S. House of Representatives and to distribute federal funds to local communities. For this analysis, data is extracted from census.gov and flows through a data pipeline, in which it goes through transformation and analysis. 
 
-The resources used in the data pipeline are AWS S3 buckets, AWS EMR, Pyspark and Databricks. Here a generalized flow of the data pipeline:
+The resources used in the data pipeline are AWS S3 buckets, AWS EMR, Pyspark and Databricks. Here is a generalized flow of the data pipeline:
 
 ![flow](https://github.com/youavang/Data_Lake_Pipeline/blob/main/Databricks_ETL_images/EMR-Spark-Databricks.jpg)
 
